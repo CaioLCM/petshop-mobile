@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:petshop_mobile/features/auth/presentation/pages/login_page.dart';
 
-class InitialLoginPage extends StatefulWidget {
+class InitialLoginPage extends StatelessWidget {
   const InitialLoginPage({super.key});
 
-  @override
-  State<InitialLoginPage> createState() => _InitialLoginPageState();
-}
-
-class _InitialLoginPageState extends State<InitialLoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,7 +56,11 @@ class _InitialLoginPageState extends State<InitialLoginPage> {
                       side: BorderSide(width: 2, color: Color(0xFF60A5FA)),
                       // To customize border, use side: BorderSide(...)
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(
+                        context,
+                      ).push(MaterialPageRoute(builder: (_) => LoginPage()));
+                    },
                     child: Text(
                       "Fazer login",
                       style: TextStyle(
@@ -82,7 +82,15 @@ class _InitialLoginPageState extends State<InitialLoginPage> {
                       foregroundColor: Color(0xFF020A22),
                       side: BorderSide(width: 2, color: Color(0xFF60A5FA)),
                     ),
-                    child: Text("Cadastro", style: TextStyle(fontFamily: "Nunito", fontWeight: FontWeight.w500, fontSize: 16, letterSpacing: 0),),
+                    child: Text(
+                      "Cadastro",
+                      style: TextStyle(
+                        fontFamily: "Nunito",
+                        fontWeight: FontWeight.w500,
+                        fontSize: 16,
+                        letterSpacing: 0,
+                      ),
+                    ),
                   ),
                 ),
               ],
