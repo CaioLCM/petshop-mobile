@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:petshop_mobile/features/auth/presentation/pages/signup_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -41,6 +42,7 @@ class _LoginPageState extends State<LoginPage> {
                       fontWeight: FontWeight.w500,
                       fontSize: 22,
                       letterSpacing: 0,
+                      color: Color(0xFF020A22)
                     ),
                   ),
                 ),
@@ -51,6 +53,8 @@ class _LoginPageState extends State<LoginPage> {
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
             child: TextField(
               decoration: InputDecoration(
+                filled: true,
+                fillColor: Color(0xFFFCFCFC),
                 hintText: "Email",
                 border: OutlineInputBorder(
                   borderSide: BorderSide(width: 2),
@@ -69,6 +73,8 @@ class _LoginPageState extends State<LoginPage> {
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
             child: TextField(
               decoration: InputDecoration(
+                filled: true,
+                fillColor: Color(0xFFFCFCFC),
                 hintText: "Senha",
                 border: OutlineInputBorder(
                   borderSide: BorderSide(width: 2),
@@ -85,12 +91,12 @@ class _LoginPageState extends State<LoginPage> {
           ),
           ElevatedButton(
             onPressed: () {},
-            child: Text("Entrar"),
             style: ElevatedButton.styleFrom(
               minimumSize: Size(205, 48),
               foregroundColor: Color(0xFF020A22),
               backgroundColor: Color(0xFF3B82F6),
             ),
+            child: Text("Entrar"),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -102,17 +108,24 @@ class _LoginPageState extends State<LoginPage> {
                   fontWeight: FontWeight.w500,
                   fontSize: 16,
                   letterSpacing: 0,
+                  color: Color(0xFF020A22)
                 ),
               ),
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(
+                    context,
+                  ).push(MaterialPageRoute(builder: (_) => SignupPage()));
+                },
                 child: Text(
                   "Criar agora",
                   style: TextStyle(
-                    fontFamily: "Nunito",
+                    decoration: TextDecoration.underline,
+                    fontFamily: "Inter",
                     fontWeight: FontWeight.w500,
                     fontSize: 16,
                     letterSpacing: 0,
+                    color: Color(0xFF3B82F6),
                   ),
                 ),
               ),

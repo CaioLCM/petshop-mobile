@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:petshop_mobile/features/auth/presentation/pages/login_page.dart';
+import 'package:petshop_mobile/features/auth/presentation/pages/signup_page.dart';
 
 class InitialLoginPage extends StatelessWidget {
   const InitialLoginPage({super.key});
@@ -75,7 +76,7 @@ class InitialLoginPage extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.fromLTRB(25, 10, 0, 0),
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {Navigator.of(context).push(MaterialPageRoute(builder: (_) => SignupPage()));},
                     style: ElevatedButton.styleFrom(
                       minimumSize: Size(343, 44),
                       backgroundColor: Color(0xFFFCFCFC),
