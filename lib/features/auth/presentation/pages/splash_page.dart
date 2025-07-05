@@ -15,7 +15,7 @@ class _SplashPageState extends State<SplashPage> {
     return Scaffold(
       body: GestureDetector(
         onTap: () {
-          Navigator.of(context).push(MaterialPageRoute(builder: (_) => InitialLoginPage()));
+          Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) => InitialLoginPage()));
         },
         child: Stack(
           children: [

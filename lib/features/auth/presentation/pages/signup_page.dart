@@ -17,7 +17,11 @@ class _SignupPageState extends State<SignupPage> {
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 30.0),
-            child: Image.asset("assets/images/cat.png", width: 191, height: 155),
+            child: Image.asset(
+              "assets/images/cat.png",
+              width: 191,
+              height: 155,
+            ),
           ),
           Row(
             children: [
@@ -31,7 +35,7 @@ class _SignupPageState extends State<SignupPage> {
                       fontWeight: FontWeight.w500,
                       fontSize: 22,
                       letterSpacing: 0,
-                      color: Color(0xFF020A22)
+                      color: Color(0xFF020A22),
                     ),
                   ),
                 ),
@@ -51,6 +55,20 @@ class _SignupPageState extends State<SignupPage> {
                 labelText: "Nome",
                 filled: true,
                 fillColor: Color(0xFFFCFCFC),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    width: 2,
+                    color: Color(0xFF60A5FA),
+                  ), // borda azul quando não focado
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    width: 2,
+                    color: Color(0xFF3B82F6),
+                  ), // borda azul escuro quando focado
+                  borderRadius: BorderRadius.circular(12),
+                ),
                 border: OutlineInputBorder(
                   borderSide: BorderSide(width: 2, color: Color(0xFF60A5FA)),
                   borderRadius: BorderRadius.circular(10),
@@ -71,6 +89,20 @@ class _SignupPageState extends State<SignupPage> {
                 filled: true,
                 fillColor: Color(0xFFFCFCFC),
                 labelText: "Email",
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    width: 2,
+                    color: Color(0xFF60A5FA),
+                  ), // borda azul quando não focado
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    width: 2,
+                    color: Color(0xFF3B82F6),
+                  ), // borda azul escuro quando focado
+                  borderRadius: BorderRadius.circular(12),
+                ),
                 border: OutlineInputBorder(
                   borderSide: BorderSide(width: 2, color: Color(0xFF60A5FA)),
                   borderRadius: BorderRadius.circular(10),
@@ -91,6 +123,20 @@ class _SignupPageState extends State<SignupPage> {
                 filled: true,
                 fillColor: Color(0xFFFCFCFC),
                 labelText: "Senha",
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    width: 2,
+                    color: Color(0xFF60A5FA),
+                  ), // borda azul quando não focado
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    width: 2,
+                    color: Color(0xFF3B82F6),
+                  ), // borda azul escuro quando focado
+                  borderRadius: BorderRadius.circular(12),
+                ),
                 border: OutlineInputBorder(
                   borderSide: BorderSide(width: 2, color: Color(0xFF60A5FA)),
                   borderRadius: BorderRadius.circular(10),
@@ -111,6 +157,20 @@ class _SignupPageState extends State<SignupPage> {
                 filled: true,
                 fillColor: Color(0xFFFCFCFC),
                 labelText: "Confirme sua senha",
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    width: 2,
+                    color: Color(0xFF60A5FA),
+                  ), // borda azul quando não focado
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    width: 2,
+                    color: Color(0xFF3B82F6),
+                  ), // borda azul escuro quando focado
+                  borderRadius: BorderRadius.circular(12),
+                ),
                 border: OutlineInputBorder(
                   borderSide: BorderSide(width: 2, color: Color(0xFF60A5FA)),
                   borderRadius: BorderRadius.circular(10),
@@ -119,7 +179,7 @@ class _SignupPageState extends State<SignupPage> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 140.0),
+            padding: const EdgeInsets.symmetric(vertical: 120.0),
             child: ElevatedButton(
               onPressed: () {},
               style: ElevatedButton.styleFrom(
@@ -128,35 +188,50 @@ class _SignupPageState extends State<SignupPage> {
                 ),
                 backgroundColor: Color(0xFF3B82F6),
                 foregroundColor: Color(0xFF020A22),
-                fixedSize: Size(205, 48)
-              ), 
-              child: Text("Criar Conta", style: TextStyle(
-                fontFamily: "Nunito",
-                fontWeight: FontWeight.w500,
-                fontSize: 16,
-                letterSpacing: 0
-              ),),
+                fixedSize: Size(205, 48),
+                elevation: 5
               ),
+              child: Text(
+                "Criar Conta",
+                style: TextStyle(
+                  fontFamily: "Nunito",
+                  fontWeight: FontWeight.w500,
+                  fontSize: 16,
+                  letterSpacing: 0,
+                ),
+              ),
+            ),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("Já possui uma conta?", style: TextStyle(
-                fontFamily: "Inter",
-                fontWeight: FontWeight.w500,
-                fontSize: 14,
-                letterSpacing: 0
-                )),
-              TextButton(onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(builder: (_) => LoginPage()));
-              }, child: Text("Faça login", style: TextStyle(
-                decoration: TextDecoration.underline,
-                fontFamily: "Inter",
-                fontWeight: FontWeight.w500,
-                fontSize: 14,
-                letterSpacing: 0,
-                color: Color(0xFF3B82F6)
-                ))),
+              Text(
+                "Já possui uma conta?",
+                style: TextStyle(
+                  fontFamily: "Inter",
+                  fontWeight: FontWeight.w500,
+                  fontSize: 14,
+                  letterSpacing: 0,
+                ),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (_) => LoginPage()),
+                  );
+                },
+                child: Text(
+                  "Faça login",
+                  style: TextStyle(
+                    decoration: TextDecoration.underline,
+                    fontFamily: "Inter",
+                    fontWeight: FontWeight.w500,
+                    fontSize: 14,
+                    letterSpacing: 0,
+                    color: Color(0xFF3B82F6),
+                  ),
+                ),
+              ),
             ],
           ),
         ],
