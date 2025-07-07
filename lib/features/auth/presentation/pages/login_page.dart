@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:petshop_mobile/features/auth/presentation/pages/signup_page.dart';
+import 'package:petshop_mobile/features/home/presentation/pages/home_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -24,9 +25,16 @@ class _LoginPageState extends State<LoginPage> {
               decoration: BoxDecoration(
                 color: Color(0xFF1E3A8A),
                 borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(100),
-                  bottomRight: Radius.circular(100),
+                  bottomLeft: Radius.circular(130),
+                  bottomRight: Radius.circular(130),
                 ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    blurRadius: 15,
+                    offset: Offset(0, 8),
+                  )
+                ]
               ),
             ),
           ),
@@ -170,7 +178,9 @@ class _LoginPageState extends State<LoginPage> {
                   Container(
                     margin: EdgeInsets.fromLTRB(0, 8, 0, 0),
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) => HomePage()));
+                      },
                       style: ElevatedButton.styleFrom(
                         minimumSize: Size(205, 48),
                         foregroundColor: Color(0xFF020A22),

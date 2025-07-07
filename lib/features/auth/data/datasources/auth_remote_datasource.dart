@@ -17,7 +17,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDatasource {
 
   @override
   Future<Map<String, dynamic>> login (String email, String password) async {
-    final response = await client.post(Uri.parse("$baseUrl/auth/login"),
+    final response = await client.post(Uri.parse("$baseUrl/login"),
     headers: {
       "Content-Type": "application/json",
       "Accept": "application/json"
