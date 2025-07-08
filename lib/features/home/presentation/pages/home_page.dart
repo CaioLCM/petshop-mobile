@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:petshop_mobile/features/estoque/presentation/pages/estoque_page.dart';
 import 'package:petshop_mobile/features/perfil/presentation/pages/perfil_page.dart';
 
 class HomePage extends StatelessWidget {
@@ -97,7 +98,7 @@ class HomePage extends StatelessWidget {
             child: ElevatedButton(
               onPressed: () {
                 Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (_) => HomePage()),
+                  MaterialPageRoute(builder: (_) => EstoquePage()),
                 );
               },
               style: ElevatedButton.styleFrom(

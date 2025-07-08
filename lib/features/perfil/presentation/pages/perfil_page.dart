@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:petshop_mobile/core/widgets/navigator_menu.dart';
+import 'package:petshop_mobile/features/auth/presentation/pages/login_page.dart';
 
 class PerfilPage extends StatefulWidget {
   const PerfilPage({super.key});
@@ -247,8 +248,9 @@ class _PerfilPageState extends State<PerfilPage> {
                   child: Row(
                     children: [
                       Icon(Icons.exit_to_app, color: Color(0xFF3B82F6),),
-                      Text(
-                        "Sair da conta",
+                      TextButton(onPressed: (){
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) => LoginPage()));
+                      }, child: Text("Sair da conta",
                         style: TextStyle(
                           decoration: TextDecoration.underline,
                           fontFamily: "Inter",
@@ -256,8 +258,7 @@ class _PerfilPageState extends State<PerfilPage> {
                           fontSize: 16,
                           letterSpacing: 0,
                           color: Color(0xFF3B82F6),
-                        ),
-                      ),
+                        ),))
                     ],
                   ),
                 ),
