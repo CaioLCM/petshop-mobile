@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:petshop_mobile/features/estoque/presentation/pages/cadastro_estoque_page.dart';
 import 'package:petshop_mobile/features/estoque/presentation/pages/estoque_page.dart';
-import 'package:petshop_mobile/features/estoque/presentation/pages/menu_estoque.dart';
+import 'package:petshop_mobile/features/home/presentation/pages/home_page.dart';
 import 'package:petshop_mobile/features/perfil/presentation/pages/perfil_page.dart';
-import 'package:petshop_mobile/features/produtos/presentation/pages/menu_produto.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+class MenuEstoque extends StatelessWidget {
+  const MenuEstoque({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +58,7 @@ class HomePage extends StatelessWidget {
             child: ElevatedButton(
               onPressed: () {
                 Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (_) => PerfilPage()),
+                  MaterialPageRoute(builder: (_) => CadastroEstoquePage()),
                 );
               },
               style: ElevatedButton.styleFrom(
@@ -70,7 +70,7 @@ class HomePage extends StatelessWidget {
                 ),
                 elevation: 5,
               ),
-              child: Text("Perfil"),
+              child: Text("Cadastro de Estoques"),
             ),
           ),
           Positioned(
@@ -78,9 +78,9 @@ class HomePage extends StatelessWidget {
             left: MediaQuery.of(context).size.width * 0.5 - 100,
             child: ElevatedButton(
               onPressed: () {
-                Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (_) => MenuProduto()),
-                );
+               Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (_) => EstoquePage()),
+                ); 
               },
               style: ElevatedButton.styleFrom(
                 minimumSize: Size(205, 48),
@@ -91,30 +91,30 @@ class HomePage extends StatelessWidget {
                 ),
                 elevation: 5,
               ),
-              child: Text("Produtos"),
+              child: Text("Edição de Estoque"),
             ),
           ),
           Positioned(
-            top: 484,
-            left: MediaQuery.of(context).size.width * 0.5 - 100,
-            child: ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (_) => MenuEstoque()),
-                );
-              },
-              style: ElevatedButton.styleFrom(
-                minimumSize: Size(205, 48),
-                foregroundColor: Color(0xFF020A22),
-                backgroundColor: Color(0xFF3B82F6),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
+            top: 548,
+            left: 173,
+            child: TextButton(
+                onPressed: () {
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (_) => HomePage()),
+                  );
+                },
+                child: Text(
+                  "Voltar",
+                  style: TextStyle(
+                    decoration: TextDecoration.underline,
+                    fontFamily: "Inter",
+                    fontWeight: FontWeight.w500,
+                    fontSize: 14,
+                    letterSpacing: 0,
+                    color: Color(0xFF3B82F6),
+                  ),
                 ),
-                elevation: 5,
-              ),
-              child: Text("Estoque"),
-            ),
-          ),
+              ),)
         ],
       ),
     );

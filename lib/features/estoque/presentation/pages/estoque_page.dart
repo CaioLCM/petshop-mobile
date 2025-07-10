@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:petshop_mobile/core/widgets/navigator_menu.dart';
+import 'package:petshop_mobile/features/estoque/presentation/pages/cadastro_estoque_page.dart';
 
 class EstoquePage extends StatelessWidget {
   const EstoquePage({super.key});
@@ -31,7 +32,7 @@ class EstoquePage extends StatelessWidget {
                 ElevatedButton(
                   onPressed: () {
                     Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (_) => EstoquePage()),
+                      MaterialPageRoute(builder: (_) => CadastroEstoquePage()),
                     );
                   },
                   style: ElevatedButton.styleFrom(
@@ -48,9 +49,9 @@ class EstoquePage extends StatelessWidget {
                 SizedBox(width: 10),
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (_) => EstoquePage()),
-                    );
+                    /* Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (_) => CadastroEstoquePage()),
+                    ); */
                   },
                   style: ElevatedButton.styleFrom(
                     minimumSize: Size(175, 40.98),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:petshop_mobile/features/estoque/presentation/pages/estoque_page.dart';
+import 'package:petshop_mobile/features/estoque/presentation/pages/menu_estoque.dart';
 import 'package:petshop_mobile/features/perfil/presentation/pages/perfil_page.dart';
+import 'package:petshop_mobile/features/produtos/presentation/pages/menu_produto.dart';
 
 class NavigatorMenu extends StatelessWidget {
   const NavigatorMenu({super.key});
@@ -20,7 +22,7 @@ class NavigatorMenu extends StatelessWidget {
         children: [
           IconButton(
             onPressed: () {
-              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) => PerfilPage()));
+              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) => MenuProduto()));
             },
             icon: Icon(
               Icons.local_offer,
@@ -30,7 +32,7 @@ class NavigatorMenu extends StatelessWidget {
           ),
           IconButton(
             onPressed: () {
-              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) => EstoquePage()));
+              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) => MenuEstoque()));
             },
             icon: Icon(
               Icons.credit_card,
@@ -39,7 +41,9 @@ class NavigatorMenu extends StatelessWidget {
             ),
           ),
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) => PerfilPage()));
+            },
             icon: Icon(Icons.person, color: Color(0xFFF0F9FF), size: 33.62),
           ),
         ],
