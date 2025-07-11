@@ -75,7 +75,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDatasource {
     String senha,
   ) async {
     final response = await client.put(
-      Uri.parse('$baseUrl/api/perfil'),
+      Uri.parse('$baseUrl/perfil'),
       headers: {'Content-Type': 'application/json'},
       body: json.encode({'nome': nome, 'email': email, 'senha': senha}),
     );

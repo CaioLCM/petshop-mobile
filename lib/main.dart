@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:petshop_mobile/features/auth/presentation/pages/splash_page.dart';
 import 'package:petshop_mobile/features/auth/presentation/providers/auth_provider.dart';
+import 'package:petshop_mobile/features/produtos/presentation/providers/produto_provider.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -15,7 +16,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => AuthProvider())
+        ChangeNotifierProvider(create: (_) => AuthProvider()),
+        ChangeNotifierProvider(create: (_) => ProdutoProvider())
       ],
       child: MaterialApp(
         title: 'Flutter Demo',

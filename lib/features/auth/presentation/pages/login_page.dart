@@ -38,13 +38,6 @@ class _LoginPageState extends State<LoginPage> {
       final success = await authProvider.login(email, senha);
 
       if (success) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text("Login realizado com sucesso!"),
-            backgroundColor: Colors.green,
-          ),
-        );
-
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(builder: (_) => HomePage())
         );
