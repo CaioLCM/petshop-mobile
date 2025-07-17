@@ -75,13 +75,12 @@ Future<Map<String, dynamic>> editarProduto(
   String descricao,
   String token,
 ) async {
-  // ← VERIFICAR SE O ID NÃO ESTÁ VAZIO
   if (id.isEmpty) {
     throw Exception('ID do produto não pode estar vazio');
   }
 
   final response = await client.put(
-    Uri.parse('$baseUrl/produtos/$id'), // ← VERIFICAR SE ESTÁ ASSIM
+    Uri.parse('$baseUrl/produtos/$id'),
     headers: {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer $token',

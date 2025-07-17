@@ -15,21 +15,21 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController senhaController = TextEditingController();
 
-  Future<void> _loginUser() async{
+  Future<void> _loginUser() async {
     try {
       String email = emailController.text.trim();
       String senha = senhaController.text;
 
-      if(email.isEmpty || !email.contains('@')){
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("Email inválido"))
-        );
+      if (email.isEmpty || !email.contains('@')) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text("Email inválido")));
         return;
       }
 
-      if(senha.isEmpty || senha.length < 6) {
+      if (senha.isEmpty || senha.length < 6) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("Senha deve ter no mínimo 6 caracteres!"))
+          SnackBar(content: Text("Senha deve ter no mínimo 6 caracteres!")),
         );
         return;
       }
@@ -38,21 +38,23 @@ class _LoginPageState extends State<LoginPage> {
       final success = await authProvider.login(email, senha);
 
       if (success) {
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (_) => HomePage())
-        );
+        Navigator.of(
+          context,
+        ).pushReplacement(MaterialPageRoute(builder: (_) => HomePage()));
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text("Erro: Email ou senha incorretos"),
             backgroundColor: Colors.red,
-          )
+          ),
         );
       }
-    } catch (e){
+    } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Erro: Email ou senha incorretos"),
-        backgroundColor: Colors.red,)
+        SnackBar(
+          content: Text("Erro: Email ou senha incorretos"),
+          backgroundColor: Colors.red,
+        ),
       );
     }
   }
@@ -82,8 +84,8 @@ class _LoginPageState extends State<LoginPage> {
                         color: Colors.black.withOpacity(0.1),
                         blurRadius: 15,
                         offset: Offset(0, 8),
-                      )
-                    ]
+                      ),
+                    ],
                   ),
                 ),
               ),
@@ -134,7 +136,9 @@ class _LoginPageState extends State<LoginPage> {
                         children: [
                           Expanded(
                             child: Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 8.0,
+                              ),
                               child: Text(
                                 "Login",
                                 style: TextStyle(
@@ -229,9 +233,12 @@ class _LoginPageState extends State<LoginPage> {
                       Container(
                         margin: EdgeInsets.fromLTRB(0, 8, 0, 0),
                         child: ElevatedButton(
-                          onPressed: authProvider.isLoading ? null : () async{
-                            await _loginUser();
-                          },
+                          onPressed:
+                              authProvider.isLoading
+                                  ? null
+                                  : () async {
+                                    await _loginUser();
+                                  },
                           style: ElevatedButton.styleFrom(
                             minimumSize: Size(205, 48),
                             foregroundColor: Color(0xFF020A22),
@@ -239,18 +246,19 @@ class _LoginPageState extends State<LoginPage> {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10),
                             ),
-                            elevation: 5
+                            elevation: 5,
                           ),
-                          child: authProvider.isLoading 
-                              ? SizedBox(
-                                  width: 20,
-                                  height: 20,
-                                  child: CircularProgressIndicator(
-                                    color: Colors.white,
-                                    strokeWidth: 2,
-                                  ),
-                                )
-                              : Text("Entrar"),
+                          child:
+                              authProvider.isLoading
+                                  ? SizedBox(
+                                    width: 20,
+                                    height: 20,
+                                    child: CircularProgressIndicator(
+                                      color: Colors.white,
+                                      strokeWidth: 2,
+                                    ),
+                                  )
+                                  : Text("Entrar"),
                         ),
                       ),
                       Container(
@@ -271,7 +279,9 @@ class _LoginPageState extends State<LoginPage> {
                             TextButton(
                               onPressed: () {
                                 Navigator.of(context).pushReplacement(
-                                  MaterialPageRoute(builder: (_) => SignupPage()),
+                                  MaterialPageRoute(
+                                    builder: (_) => SignupPage(),
+                                  ),
                                 );
                               },
                               child: Text(

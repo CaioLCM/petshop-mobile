@@ -55,12 +55,11 @@ class InitialLoginPage extends StatelessWidget {
                       backgroundColor: Color(0xFF3B82F6),
                       foregroundColor: Color(0xFF020A22),
                       side: BorderSide(width: 2, color: Color(0xFF60A5FA)),
-                      // To customize border, use side: BorderSide(...)
                     ),
                     onPressed: () {
-                      Navigator.of(
-                        context,
-                      ).pushReplacement(MaterialPageRoute(builder: (_) => LoginPage()));
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(builder: (_) => LoginPage()),
+                      );
                     },
                     child: Text(
                       "Fazer login",
@@ -76,7 +75,11 @@ class InitialLoginPage extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.fromLTRB(25, 10, 0, 0),
                   child: ElevatedButton(
-                    onPressed: () {Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) => SignupPage()));},
+                    onPressed: () {
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(builder: (_) => SignupPage()),
+                      );
+                    },
                     style: ElevatedButton.styleFrom(
                       minimumSize: Size(343, 44),
                       backgroundColor: Color(0xFFFCFCFC),

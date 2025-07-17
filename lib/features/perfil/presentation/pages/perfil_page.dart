@@ -12,75 +12,54 @@ class PerfilPage extends StatefulWidget {
 }
 
 class _PerfilPageState extends State<PerfilPage> {
-  TextEditingController nomeController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController codigoController = TextEditingController();
-  TextEditingController senhaController = TextEditingController();
+  final TextEditingController nomeController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController codigoController = TextEditingController();
+  final TextEditingController senhaController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final authProvider = Provider.of<AuthProvider>(context, listen: false);
-      if (authProvider.user != null) {
-        _preencherCampos();
+      final user = authProvider.user;
+      if (user != null) {
+        nomeController.text = user.nome;
+        emailController.text = user.email;
+        codigoController.text = user.id;
       }
     });
   }
 
-  void _preencherCampos() {
-    final authProvider = Provider.of<AuthProvider>(context, listen: false);
-    final user = authProvider.user;
-
-    if (user != null) {
-      nomeController.text = user.nome;
-      emailController.text = user.email;
-      codigoController.text = user.codigoFuncionario ?? "";
-    }
+  @override
+  void dispose() {
+    nomeController.dispose();
+    emailController.dispose();
+    codigoController.dispose();
+    senhaController.dispose();
+    super.dispose();
   }
 
   Future<void> _atualizarPerfil() async {
-    String nome = nomeController.text.trim();
-    String email = emailController.text.trim();
-    String senha = senhaController.text;
-
-    if (nome.isEmpty || email.isEmpty) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text("Nome e email são obrigatórios!")));
-      return;
-    }
-
-    if (senha.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            "Informe sua senha atual para confirmar as alterações!",
-          ),
-        ),
-      );
-      return;
-    }
-
     final authProvider = Provider.of<AuthProvider>(context, listen: false);
-    final success = await authProvider.updateProfile(nome, email, senha);
-
-    if (success) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text("Perfil atualizado com sucesso!"),
-          backgroundColor: Colors.green,
-        ),
+    try {
+      final success = await authProvider.updateProfile(
+        nome: nomeController.text,
+        email: emailController.text,
+        senha: senhaController.text,
       );
-      senhaController.clear();
-    } else {
+      if (success) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Perfil atualizado com sucesso!')),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Erro ao atualizar perfil: ${authProvider.error ?? 'Erro desconhecido'}')),
+        );
+      }
+    } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            "Erro: ${authProvider.error ?? 'Senha incorreta ou erro desconhecido'}",
-          ),
-          backgroundColor: Colors.red,
-        ),
+        SnackBar(content: Text('Erro ao atualizar perfil: $e')),
       );
     }
   }
@@ -90,47 +69,13 @@ class _PerfilPageState extends State<PerfilPage> {
     return Consumer<AuthProvider>(
       builder: (context, authProvider, child) {
         final user = authProvider.user;
-
-        print("DEBUG - PerfilPage: user = $user");
-        print("DEBUG - PerfilPage: user?.nome = ${user?.nome}");
-        print("DEBUG - PerfilPage: user?.permissao = ${user?.permissao}");
-
         return Scaffold(
           backgroundColor: Color(0xFFF0F9FF),
           body: Stack(
             children: [
               Positioned(
-                top: 84,
-                left: 149,
-                child: Container(
-                  width: 100,
-                  height: 100,
-                  decoration: BoxDecoration(
-                    color: Colors.blue,
-                    shape: BoxShape.circle,
-                  ),
-                ),
-              ),
-              Positioned(
-                top: 153,
-                left: 214,
-                child: Container(
-                  width: 30,
-                  height: 30,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    shape: BoxShape.circle,
-                  ),
-                  child: IconButton(
-                    onPressed: () {},
-                    icon: Icon(Icons.edit),
-                    alignment: Alignment.center,
-                  ),
-                ),
-              ),
-              Positioned(
                 top: 204,
-                left: 72,
+                left: 17,
                 child: Text(
                   user?.nome ?? "Nome não encontrado",
                   style: TextStyle(color: Color(0xFF020A22), fontSize: 24),
@@ -163,186 +108,184 @@ class _PerfilPageState extends State<PerfilPage> {
               Positioned(
                 top: 294,
                 left: 17,
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: 52,
-                      width: 360,
-                      child: TextField(
-                        controller: nomeController,
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Color(0xFFFCFCFC),
-                          hintText: "Nome",
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              width: 2,
-                              color: Color(0xFF60A5FA),
-                            ), // borda azul quando não focado
-                            borderRadius: BorderRadius.circular(12),
+                child: Container(
+                  width: 360,
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 52,
+                        width: 360,
+                        child: TextField(
+                          controller: nomeController,
+                          decoration: InputDecoration(
+                            filled: true,
+                            fillColor: Color(0xFFFCFCFC),
+                            hintText: "Nome",
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                width: 2,
+                                color: Color(0xFF60A5FA),
+                              ),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(width: 2),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                width: 2,
+                                color: Color(0xFF3B82F6),
+                              ),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
                           ),
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(width: 2),
-                            borderRadius: BorderRadius.circular(12),
+                          style: TextStyle(
+                            fontFamily: "Inter",
+                            fontWeight: FontWeight.w400,
+                            fontSize: 16,
+                            letterSpacing: 0,
                           ),
-
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              width: 2,
-                              color: Color(0xFF3B82F6),
-                            ), // borda azul escuro quando focado
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                        ),
-                        style: TextStyle(
-                          fontFamily: "Inter",
-                          fontWeight: FontWeight.w400,
-                          fontSize: 16,
-                          letterSpacing: 0,
                         ),
                       ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(0, 12, 0, 0),
-                      height: 52,
-                      width: 360,
-                      child: TextField(
-                        controller: emailController,
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Color(0xFFFCFCFC),
-                          hintText: "E-mail",
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              width: 2,
-                              color: Color(0xFF60A5FA),
-                            ), // borda azul quando não focado
-                            borderRadius: BorderRadius.circular(12),
+                      SizedBox(height: 12),
+                      SizedBox(
+                        height: 52,
+                        width: 360,
+                        child: TextField(
+                          controller: emailController,
+                          decoration: InputDecoration(
+                            filled: true,
+                            fillColor: Color(0xFFFCFCFC),
+                            hintText: "E-mail",
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                width: 2,
+                                color: Color(0xFF60A5FA),
+                              ),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(width: 2),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                width: 2,
+                                color: Color(0xFF3B82F6),
+                              ),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
                           ),
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(width: 2),
-                            borderRadius: BorderRadius.circular(12),
+                          style: TextStyle(
+                            fontFamily: "Inter",
+                            fontWeight: FontWeight.w400,
+                            fontSize: 16,
+                            letterSpacing: 0,
                           ),
-
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              width: 2,
-                              color: Color(0xFF3B82F6),
-                            ), // borda azul escuro quando focado
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                        ),
-                        style: TextStyle(
-                          fontFamily: "Inter",
-                          fontWeight: FontWeight.w400,
-                          fontSize: 16,
-                          letterSpacing: 0,
                         ),
                       ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(0, 12, 0, 0),
-                      height: 52,
-                      width: 360,
-                      child: TextField(
-                        controller: codigoController,
-                        enabled: false,
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Color(0xFFFCFCFC),
-                          hintText: "Codigo",
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              width: 2,
-                              color: Color(0xFF60A5FA),
-                            ), // borda azul quando não focado
-                            borderRadius: BorderRadius.circular(12),
+                      SizedBox(height: 12),
+                      SizedBox(
+                        height: 52,
+                        width: 360,
+                        child: TextField(
+                          controller: codigoController,
+                          enabled: false,
+                          decoration: InputDecoration(
+                            filled: true,
+                            fillColor: Color(0xFFFCFCFC),
+                            hintText: "Codigo",
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                width: 2,
+                                color: Color(0xFF60A5FA),
+                              ),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(width: 2),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                width: 2,
+                                color: Color(0xFF3B82F6),
+                              ),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
                           ),
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(width: 2),
-                            borderRadius: BorderRadius.circular(12),
+                          style: TextStyle(
+                            fontFamily: "Inter",
+                            fontWeight: FontWeight.w400,
+                            fontSize: 16,
+                            letterSpacing: 0,
                           ),
-
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              width: 2,
-                              color: Color(0xFF3B82F6),
-                            ), // borda azul escuro quando focado
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                        ),
-                        style: TextStyle(
-                          fontFamily: "Inter",
-                          fontWeight: FontWeight.w400,
-                          fontSize: 16,
-                          letterSpacing: 0,
                         ),
                       ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(0, 12, 0, 0),
-                      height: 52,
-                      width: 360,
-                      child: TextField(
-                        controller: senhaController,
-                        obscureText: true,
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Color(0xFFFCFCFC),
-                          hintText: "Senha",
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              width: 2,
-                              color: Color(0xFF60A5FA),
-                            ), // borda azul quando não focado
-                            borderRadius: BorderRadius.circular(12),
+                      SizedBox(height: 12),
+                      SizedBox(
+                        height: 52,
+                        width: 360,
+                        child: TextField(
+                          controller: senhaController,
+                          obscureText: true,
+                          decoration: InputDecoration(
+                            filled: true,
+                            fillColor: Color(0xFFFCFCFC),
+                            hintText: "Senha",
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                width: 2,
+                                color: Color(0xFF60A5FA),
+                              ),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(width: 2),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                width: 2,
+                                color: Color(0xFF3B82F6),
+                              ),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
                           ),
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(width: 2),
-                            borderRadius: BorderRadius.circular(12),
+                          style: TextStyle(
+                            fontFamily: "Inter",
+                            fontWeight: FontWeight.w400,
+                            fontSize: 16,
+                            letterSpacing: 0,
                           ),
-
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              width: 2,
-                              color: Color(0xFF3B82F6),
-                            ), // borda azul escuro quando focado
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                        ),
-                        style: TextStyle(
-                          fontFamily: "Inter",
-                          fontWeight: FontWeight.w400,
-                          fontSize: 16,
-                          letterSpacing: 0,
                         ),
                       ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(0, 60, 0, 0),
-                      child: ElevatedButton(
-                        onPressed:
-                            authProvider.isLoading
-                                ? null
-                                : () async {
+                      SizedBox(height: 60),
+                      SizedBox(
+                        width: 205,
+                        height: 48,
+                        child: ElevatedButton(
+                          onPressed: authProvider.isLoading
+                              ? null
+                              : () async {
                                   await _atualizarPerfil();
                                 },
-                        style: ElevatedButton.styleFrom(
-                          minimumSize: Size(205, 48),
-                          foregroundColor: Color(0xFF020A22),
-                          backgroundColor: Color(0xFF3B82F6),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
+                          style: ElevatedButton.styleFrom(
+                            foregroundColor: Color(0xFF020A22),
+                            backgroundColor: Color(0xFF3B82F6),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            elevation: 5,
                           ),
-                          elevation: 5,
+                          child: Text("Atualizar perfil"),
                         ),
-                        child: Text("Atualizar perfil"),
                       ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(0, 30, 0, 0),
-                      child: Row(
+                      SizedBox(height: 30),
+                      Row(
                         children: [
+                          SizedBox(width: 105,),
                           Icon(Icons.exit_to_app, color: Color(0xFF3B82F6)),
                           TextButton(
                             onPressed: () {
@@ -365,24 +308,19 @@ class _PerfilPageState extends State<PerfilPage> {
                           ),
                         ],
                       ),
-                    ),
-                    NavigatorMenu(),
-                  ],
+                    ],
+                  ),
                 ),
+              ),
+              Positioned(
+                top: 720,
+                left: 10,
+                child: NavigatorMenu(selectedIndex: 2),
               ),
             ],
           ),
         );
       },
     );
-  }
-
-  @override
-  void dispose() {
-    nomeController.dispose();
-    emailController.dispose();
-    codigoController.dispose();
-    senhaController.dispose();
-    super.dispose();
   }
 }

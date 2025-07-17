@@ -15,7 +15,7 @@ class _CadastroProdutoState extends State<CadastroProduto> {
   TextEditingController nomeController = TextEditingController();
   TextEditingController tipoController = TextEditingController();
   TextEditingController marcaController = TextEditingController();
-  TextEditingController precoController = TextEditingController(); // ← ADICIONAR
+  TextEditingController precoController = TextEditingController(); 
   TextEditingController quantidadeController = TextEditingController();
   TextEditingController descricaoController = TextEditingController();
 
@@ -24,18 +24,18 @@ class _CadastroProdutoState extends State<CadastroProduto> {
       String nome = nomeController.text.trim();
       String tipo = tipoController.text.trim();
       String marca = marcaController.text.trim();
-      String precoStr = precoController.text.trim(); // ← ADICIONAR
+      String precoStr = precoController.text.trim(); 
       String quantidadeStr = quantidadeController.text.trim();
       String descricao = descricaoController.text.trim();
 
-      if (nome.isEmpty || tipo.isEmpty || marca.isEmpty || precoStr.isEmpty || quantidadeStr.isEmpty) { // ← ADICIONAR precoStr
+      if (nome.isEmpty || tipo.isEmpty || marca.isEmpty || precoStr.isEmpty || quantidadeStr.isEmpty) { 
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text("Todos os campos são obrigatórios!"))
         );
         return;
       }
 
-      double preco = double.tryParse(precoStr) ?? 0; // ← ADICIONAR
+      double preco = double.tryParse(precoStr) ?? 0; 
       if (preco <= 0) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text("Preço deve ser um número válido!"))
@@ -68,7 +68,7 @@ class _CadastroProdutoState extends State<CadastroProduto> {
         nome,
         tipo,
         marca,
-        preco,      // ← ADICIONAR
+        preco,      
         quantidade,
         descricao,
         authProvider.user!.token,
@@ -104,7 +104,7 @@ class _CadastroProdutoState extends State<CadastroProduto> {
     nomeController.clear();
     tipoController.clear();
     marcaController.clear();
-    precoController.clear(); // ← ADICIONAR
+    precoController.clear();
     quantidadeController.clear();
     descricaoController.clear();
   }
@@ -232,7 +232,7 @@ class _CadastroProdutoState extends State<CadastroProduto> {
                   ),
                 ),
               ),
-              // ← NOVO CAMPO PREÇO
+
               Positioned(
                 top: 427,
                 left: 17,
@@ -269,7 +269,7 @@ class _CadastroProdutoState extends State<CadastroProduto> {
                 ),
               ),
               Positioned(
-                top: 503, // ← POSIÇÃO MOVIDA PARA BAIXO
+                top: 503, 
                 left: 17,
                 child: SizedBox(
                   width: 360,
@@ -304,7 +304,7 @@ class _CadastroProdutoState extends State<CadastroProduto> {
                 ),
               ),
               Positioned(
-                top: 579, // ← POSIÇÃO MOVIDA PARA BAIXO
+                top: 579,
                 left: 17,
                 child: SizedBox(
                   width: 360,
@@ -338,7 +338,7 @@ class _CadastroProdutoState extends State<CadastroProduto> {
                 ),
               ),
               Positioned(
-                top: 655, // ← POSIÇÃO MOVIDA PARA BAIXO
+                top: 655,
                 left: 94,
                 child: ElevatedButton(
                   onPressed: produtoProvider.isLoading ? null : () async {
@@ -362,13 +362,13 @@ class _CadastroProdutoState extends State<CadastroProduto> {
                             strokeWidth: 2,
                           ),
                         )
-                      : Text("+ Cadastrar"),
+                      : Text("+ Cadastrar", style: TextStyle(color: Color(0xFF020A22)),),
                 ),
               ),
               Positioned(
-                top: 720, // ← POSIÇÃO MOVIDA PARA BAIXO
+                top: 720,
                 left: 10,
-                child: NavigatorMenu())
+                child: NavigatorMenu(selectedIndex: 0)),
             ],
           ),
         );
@@ -381,7 +381,7 @@ class _CadastroProdutoState extends State<CadastroProduto> {
     nomeController.dispose();
     tipoController.dispose();
     marcaController.dispose();
-    precoController.dispose(); // ← ADICIONAR
+    precoController.dispose();
     quantidadeController.dispose();
     descricaoController.dispose();
     super.dispose();

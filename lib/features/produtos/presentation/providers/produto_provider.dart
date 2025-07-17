@@ -22,7 +22,7 @@ class ProdutoProvider with ChangeNotifier {
     String nome,
     String tipo,
     String marca,
-    double preco,  // ADICIONAR
+    double preco, 
     int quantidade,
     String descricao,
     String token,
@@ -35,7 +35,7 @@ class ProdutoProvider with ChangeNotifier {
         nome,
         tipo,
         marca,
-        preco,  // ADICIONAR
+        preco, 
         quantidade,
         descricao,
         token,
@@ -55,7 +55,7 @@ class ProdutoProvider with ChangeNotifier {
     String nome,
     String tipo,
     String marca,
-    double preco,  // ADICIONAR
+    double preco, 
     int quantidade,
     String descricao,
     String token,
@@ -69,7 +69,7 @@ class ProdutoProvider with ChangeNotifier {
         nome,
         tipo,
         marca,
-        preco,  // ADICIONAR
+        preco, 
         quantidade,
         descricao,
         token,

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:petshop_mobile/features/estoque/presentation/pages/cadastro_estoque_page.dart';
-import 'package:petshop_mobile/features/estoque/presentation/pages/estoque_page.dart';
+import 'package:petshop_mobile/core/widgets/navigator_menu.dart';
 import 'package:petshop_mobile/features/home/presentation/pages/home_page.dart';
-import 'package:petshop_mobile/features/perfil/presentation/pages/perfil_page.dart';
 import 'package:petshop_mobile/features/produtos/presentation/pages/cadastro_produto.dart';
 import 'package:petshop_mobile/features/produtos/presentation/pages/edicao_produtos.dart';
 
@@ -77,7 +75,11 @@ class MenuProduto extends StatelessWidget {
                     color: Color(0xFF3B82F6),
                   ),
                 ),
-              ),)
+              ),),
+          Positioned(
+            top: 720,
+            left: 10,
+            child: NavigatorMenu(selectedIndex: 0)),
         ],
       ),
     );

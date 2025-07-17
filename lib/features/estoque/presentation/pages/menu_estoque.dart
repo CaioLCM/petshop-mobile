@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:petshop_mobile/core/widgets/navigator_menu.dart';
 import 'package:petshop_mobile/features/estoque/presentation/pages/cadastro_estoque_page.dart';
 import 'package:petshop_mobile/features/estoque/presentation/pages/estoque_page.dart';
 import 'package:petshop_mobile/features/home/presentation/pages/home_page.dart';
@@ -95,7 +96,7 @@ class MenuEstoque extends StatelessWidget {
             ),
           ),
           Positioned(
-            top: 548,
+            top: 500,
             left: 173,
             child: TextButton(
                 onPressed: () {
@@ -115,6 +116,11 @@ class MenuEstoque extends StatelessWidget {
                   ),
                 ),
               ),)
+          ,
+          Positioned(
+            top: 720,
+            left: 10,
+            child: NavigatorMenu(selectedIndex: 1))
         ],
       ),
     );

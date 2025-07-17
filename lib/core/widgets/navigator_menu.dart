@@ -5,7 +5,8 @@ import 'package:petshop_mobile/features/perfil/presentation/pages/perfil_page.da
 import 'package:petshop_mobile/features/produtos/presentation/pages/menu_produto.dart';
 
 class NavigatorMenu extends StatelessWidget {
-  const NavigatorMenu({super.key});
+  final int selectedIndex;
+  const NavigatorMenu({super.key, required this.selectedIndex});
 
   @override
   Widget build(BuildContext context) {
@@ -20,33 +21,71 @@ class NavigatorMenu extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          IconButton(
-            onPressed: () {
-              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) => MenuProduto()));
+          _buildNavIcon(
+            context,
+            icon_selected: Icons.local_offer,
+            icon: Icons.local_offer_outlined,
+            selected: selectedIndex == 0,
+            onTap: () {
+              if (selectedIndex != 0) {
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (_) => MenuProduto()),
+                );
+              }
             },
-            icon: Icon(
-              Icons.local_offer,
-              color: Color(0xFFF0F9FF),
-              size: 33.62,
-            ),
           ),
-          IconButton(
-            onPressed: () {
-              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) => MenuEstoque()));
+          _buildNavIcon(
+            context,
+            icon_selected: Icons.inventory_2,
+            icon: Icons.inventory_2_outlined,
+            selected: selectedIndex == 1,
+            onTap: () {
+              if (selectedIndex != 1) {
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (_) => MenuEstoque()),
+                );
+              }
             },
-            icon: Icon(
-              Icons.credit_card,
-              color: Color(0xFFF0F9FF),
-              size: 33.62,
-            ),
           ),
-          IconButton(
-            onPressed: () {
-              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) => PerfilPage()));
+          _buildNavIcon(
+            context,
+            icon_selected: Icons.person,
+            icon: Icons.person_outlined,
+            selected: selectedIndex == 2,
+            onTap: () {
+              if (selectedIndex != 2) {
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (_) => PerfilPage()),
+                );
+              }
             },
-            icon: Icon(Icons.person, color: Color(0xFFF0F9FF), size: 33.62),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildNavIcon(
+    BuildContext context, {
+    required IconData icon,
+    required IconData icon_selected,
+    required bool selected,
+    required VoidCallback onTap,
+  }) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: 60,
+        height: 60,
+        decoration: BoxDecoration(
+          color: Colors.transparent,
+          shape: BoxShape.circle,
+        ),
+        child: Icon(
+          selected ? icon_selected : icon,
+          color: Color(0xFFF0F9FF),
+          size: 33.62,
+        ),
       ),
     );
   }

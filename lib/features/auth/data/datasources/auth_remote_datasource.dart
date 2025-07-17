@@ -69,23 +69,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDatasource {
     }
   }
 
-  Future<Map<String, dynamic>> updateProfile(
-    String nome,
-    String email,
-    String senha,
-  ) async {
-    final response = await client.put(
-      Uri.parse('$baseUrl/perfil'),
-      headers: {'Content-Type': 'application/json'},
-      body: json.encode({'nome': nome, 'email': email, 'senha': senha}),
-    );
 
-    if (response.statusCode == 200) {
-      return json.decode(response.body);
-    } else {
-      throw Exception('Falha na atualização: ${response.body}');
-    }
-  }
 
   @override
   Future<Map<String, dynamic>> register(

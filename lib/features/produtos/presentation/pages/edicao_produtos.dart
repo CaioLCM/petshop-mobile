@@ -453,14 +453,13 @@ class _EdicaoProdutosState extends State<EdicaoProdutos> {
                             strokeWidth: 2,
                           ),
                         )
-                      : Text("Salvar Alterações"),
+                      : Text("Salvar Alterações", style: TextStyle(color: Color(0xFF020A22)),),
                 ),
               ),
               Positioned(
                 top: 736,
                 left: 10,
-                child: NavigatorMenu(),
-              ),
+                child: NavigatorMenu(selectedIndex: 0)),
             ],
           ),
         );

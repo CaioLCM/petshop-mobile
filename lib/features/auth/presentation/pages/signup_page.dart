@@ -51,7 +51,6 @@ class _SignupPageState extends State<SignupPage> {
         return;
       }
 
-
       bool temMinuscula = senha.contains(RegExp(r'[a-z]'));
       bool temMaiuscula = senha.contains(RegExp(r'[A-Z]'));
       bool temNumero = senha.contains(RegExp(r'[0-9]'));
@@ -80,7 +79,7 @@ class _SignupPageState extends State<SignupPage> {
         nome,
         email,
         senha,
-        confirmaSenha
+        confirmaSenha,
       );
 
       print("DEBUG - Resultado: $result");
@@ -89,7 +88,7 @@ class _SignupPageState extends State<SignupPage> {
         context,
       ).pushReplacement(MaterialPageRoute(builder: (_) => LoginPage()));
     } catch (e) {
-      print("DEBUG - Erro: $e"); 
+      print("DEBUG - Erro: $e");
       ScaffoldMessenger.of(
         context,
       ).showSnackBar(SnackBar(content: Text("Erro: $e")));
@@ -98,7 +97,6 @@ class _SignupPageState extends State<SignupPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     authRemoteDataSourceImpl = AuthRemoteDataSourceImpl(client: http.Client());
   }
@@ -186,14 +184,14 @@ class _SignupPageState extends State<SignupPage> {
                   borderSide: BorderSide(
                     width: 2,
                     color: Color(0xFF60A5FA),
-                  ), // borda azul quando não focado
+                  ),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(
                     width: 2,
                     color: Color(0xFF3B82F6),
-                  ), // borda azul escuro quando focado
+                  ),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 border: OutlineInputBorder(
@@ -222,14 +220,14 @@ class _SignupPageState extends State<SignupPage> {
                   borderSide: BorderSide(
                     width: 2,
                     color: Color(0xFF60A5FA),
-                  ), // borda azul quando não focado
+                  ),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(
                     width: 2,
                     color: Color(0xFF3B82F6),
-                  ), // borda azul escuro quando focado
+                  ),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 border: OutlineInputBorder(
@@ -258,14 +256,14 @@ class _SignupPageState extends State<SignupPage> {
                   borderSide: BorderSide(
                     width: 2,
                     color: Color(0xFF60A5FA),
-                  ), // borda azul quando não focado
+                  ),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(
                     width: 2,
                     color: Color(0xFF3B82F6),
-                  ), // borda azul escuro quando focado
+                  ),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 border: OutlineInputBorder(
